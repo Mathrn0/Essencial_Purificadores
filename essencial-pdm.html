@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Essencial Purificadores — Pesquisa de Mercado</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #F5FAF9;
+    --surface: #FFFFFF;
+    --ink: #0B2E33;
+    --ink-soft: #3E5D60;
+    --teal-deep: #0E4A4D;
+    --teal-deeper: #082F32;
+    --accent: #1FAE9C;
+    --accent-bright: #4FD6C4;
+    --line: #D8E6E3;
+    --steel: #7E9598;
+    --warn: #C97B3D;
+    --shadow: 0 20px 50px -30px rgba(11,46,51,0.35);
+    --radius: 18px;
+  }
+
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'Inter', sans-serif;
+    font-size:16px;
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  ::selection{background:var(--accent-bright); color:var(--teal-deeper);}
+
+  h1,h2,h3,h4{ font-family:'Space Grotesk', sans-serif; color:var(--teal-deeper); letter-spacing:-0.01em;}
+  .mono{ font-family:'IBM Plex Mono', monospace; }
+
+  a{color:var(--teal-deep);}
+
+  .wrap{ max-width:1120px; margin:0 auto; padding:0 32px; }
+
+  /* ---------- Nav ---------- */
+  .topnav{
+    position:fixed; top:0; left:0; right:0; z-index:50;
+    backdrop-filter: blur(10px);
+    background:rgba(245,250,249,0.82);
+    border-bottom:1px solid var(--line);
+  }
+  .topnav-inner{
+    max-width:1120px; margin:0 auto; padding:16px 32px;
+    display:flex; align-items:center; justify-content:space-between;
+  }
+  .brand{ display:flex; align-items:center; gap:10px; font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:15px; color:var(--teal-deeper);}
+  .brand .drop{ width:14px; height:16px; }
+  .navlinks{ display:flex; gap:26px; font-size:13px; color:var(--ink-soft); }
+  .navlinks a{ text-decoration:none; color:var(--ink-soft); transition:color .2s;}
+  .navlinks a:hover, .navlinks a:focus-visible{ color:var(--teal-deep); }
+  @media (max-width:760px){ .navlinks{display:none;} }
+
+  /* ---------- Droplet icon (signature motif) ---------- */
+  .drop{ display:inline-block; }
+
+  /* ---------- Section rhythm ---------- */
+  section{ padding:112px 0 88px; position:relative; }
+  .eyebrow{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12.5px; letter-spacing:0.14em; text-transform:uppercase;
+    color:var(--accent); display:flex; align-items:center; gap:10px; margin-bottom:18px;
+  }
+  .eyebrow::before{ content:''; width:26px; height:1px; background:var(--accent); display:inline-block; }
+  h2.title{ font-size:clamp(28px,3.6vw,42px); font-weight:600; max-width:780px; margin-bottom:14px;}
+  .lede{ color:var(--ink-soft); font-size:17px; max-width:640px; margin-bottom:56px; }
+
+  /* ---------- Hero ---------- */
+  .hero{
+    padding:172px 0 96px;
+    background:
+      radial-gradient(ellipse 900px 480px at 82% -10%, rgba(31,174,156,0.16), transparent 60%),
+      linear-gradient(180deg, #F5FAF9 0%, #F5FAF9 100%);
+    overflow:hidden;
+    position:relative;
+  }
+  .hero-inner{ display:grid; grid-template-columns:1.15fr 0.85fr; gap:40px; align-items:center; }
+  @media (max-width:900px){ .hero-inner{ grid-template-columns:1fr; } }
+  .hero h1{
+    font-size:clamp(36px,5.6vw,62px); font-weight:700; line-height:1.04; letter-spacing:-0.02em;
+    margin-bottom:22px;
+  }
+  .hero h1 span{ color:var(--accent); }
+  .hero p.sub{ color:var(--ink-soft); font-size:18px; max-width:520px; margin-bottom:34px;}
+  .hero-tags{ display:flex; gap:10px; flex-wrap:wrap; }
+  .tag{
+    font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:.03em;
+    border:1px solid var(--line); color:var(--ink-soft); padding:7px 14px; border-radius:100px; background:var(--surface);
+  }
+
+  .ripple-wrap{ position:relative; aspect-ratio:1/1; display:flex; align-items:center; justify-content:center; }
+  .ripple-wrap svg{ width:100%; height:100%; }
+  .ripple-ring{ fill:none; stroke:var(--accent); opacity:0.9; }
+  .ripple-label{ font-family:'IBM Plex Mono',monospace; }
+
+  /* ---------- Stat grid ---------- */
+  .stat-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:22px; }
+  @media (max-width:760px){ .stat-grid{ grid-template-columns:1fr; } }
+  .stat-card{
+    background:var(--surface); border:1px solid var(--line); border-radius:var(--radius);
+    padding:30px 26px; box-shadow:var(--shadow);
+  }
+  .stat-card .num{ font-family:'IBM Plex Mono',monospace; font-size:36px; font-weight:500; color:var(--teal-deeper); display:block; margin-bottom:8px;}
+  .stat-card .num small{ font-size:16px; color:var(--accent); font-weight:500; margin-left:4px;}
+  .stat-card .label{ color:var(--ink-soft); font-size:14.5px; }
+
+  /* ---------- Funnel diagram (signature) ---------- */
+  .funnel{ display:grid; grid-template-columns:1.1fr 0.9fr; gap:48px; align-items:center; margin-top:8px;}
+  @media (max-width:860px){ .funnel{ grid-template-columns:1fr; } }
+  .funnel-rings{ position:relative; aspect-ratio:1/0.85; }
+  .funnel-legend{ display:flex; flex-direction:column; gap:18px; }
+  .funnel-item{ display:flex; align-items:baseline; gap:14px; padding:14px 0; border-bottom:1px solid var(--line);}
+  .funnel-item:last-child{ border-bottom:none; }
+  .funnel-dot{ width:11px; height:11px; border-radius:50%; flex:none; }
+  .funnel-item .fnum{ font-family:'IBM Plex Mono',monospace; font-size:21px; color:var(--teal-deeper); font-weight:500; }
+  .funnel-item .flabel{ color:var(--ink-soft); font-size:14.5px; }
+
+  /* ---------- Two-column content blocks ---------- */
+  .cols-2{ display:grid; grid-template-columns:1fr 1fr; gap:24px; }
+  @media (max-width:760px){ .cols-2{ grid-template-columns:1fr; } }
+
+  .panel{
+    background:var(--surface); border:1px solid var(--line); border-radius:var(--radius);
+    padding:28px 26px;
+  }
+  .panel h3{ font-size:18px; margin-bottom:14px; display:flex; align-items:center; gap:10px;}
+  .panel ul{ list-style:none; }
+  .panel li{ position:relative; padding-left:18px; margin-bottom:10px; color:var(--ink-soft); font-size:15px; }
+  .panel li::before{ content:''; position:absolute; left:0; top:9px; width:6px; height:6px; border-radius:50%; background:var(--accent);}
+
+  /* fear/trust two-tone panel */
+  .panel.warn h3{ color:var(--warn); }
+  .panel.warn li::before{ background:var(--warn); }
+
+  /* ---------- Brand ranking ---------- */
+  .rank-list{ display:flex; flex-direction:column; gap:0; border:1px solid var(--line); border-radius:var(--radius); overflow:hidden; background:var(--surface);}
+  .rank-row{ display:grid; grid-template-columns:50px 1fr 140px; align-items:center; gap:18px; padding:18px 24px; border-bottom:1px solid var(--line); }
+  .rank-row:last-child{ border-bottom:none; }
+  .rank-row .rn{ font-family:'IBM Plex Mono',monospace; color:var(--steel); font-size:14px;}
+  .rank-row .rname{ font-weight:600; font-family:'Space Grotesk',sans-serif; }
+  .rank-bar-track{ height:6px; background:var(--line); border-radius:4px; overflow:hidden;}
+  .rank-bar{ height:100%; background:linear-gradient(90deg, var(--teal-deep), var(--accent-bright)); }
+
+  /* ---------- Maintenance cards ---------- */
+  .maint-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:20px;}
+  @media (max-width:900px){ .maint-grid{ grid-template-columns:1fr; } }
+  .maint-card{ background:var(--teal-deeper); color:#EAF5F3; border-radius:var(--radius); padding:26px; position:relative; overflow:hidden;}
+  .maint-card h4{ color:#fff; font-size:16.5px; margin-bottom:10px;}
+  .maint-card p{ color:#B9D6D1; font-size:14px; }
+  .maint-card .tagr{ font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.08em; text-transform:uppercase; color:var(--accent-bright); margin-bottom:12px; display:block;}
+
+  /* ---------- Competitor cards ---------- */
+  .comp-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:20px;}
+  @media (max-width:900px){ .comp-grid{ grid-template-columns:1fr; } }
+  .comp-card{ background:var(--surface); border:1px solid var(--line); border-radius:var(--radius); padding:26px; display:flex; flex-direction:column; gap:14px;}
+  .comp-head{ display:flex; justify-content:space-between; align-items:flex-start;}
+  .comp-head h4{ font-size:18px; }
+  .score{ text-align:right; }
+  .score .val{ font-family:'IBM Plex Mono',monospace; font-size:20px; color:var(--teal-deeper); font-weight:500;}
+  .score .cnt{ font-size:11.5px; color:var(--steel); }
+  .comp-card .diff{ font-size:13.5px; color:var(--ink-soft); background:#EEF6F4; border-radius:10px; padding:10px 12px; }
+  .comp-card .links{ font-size:13px; display:flex; gap:14px; margin-top:4px;}
+  .comp-card .links a{ text-decoration:none; border-bottom:1px solid var(--accent); padding-bottom:1px;}
+
+  /* ---------- Persona ---------- */
+  .persona{ display:grid; grid-template-columns:280px 1fr; gap:32px; background:var(--surface); border:1px solid var(--line); border-radius:24px; padding:40px; box-shadow:var(--shadow);}
+  @media (max-width:820px){ .persona{ grid-template-columns:1fr; } }
+  .persona-id{ border-right:1px solid var(--line); padding-right:32px;}
+  @media (max-width:820px){ .persona-id{ border-right:none; border-bottom:1px solid var(--line); padding-right:0; padding-bottom:24px;} }
+  .persona-avatar{
+    width:64px; height:64px; border-radius:50%;
+    background:linear-gradient(135deg, var(--accent), var(--teal-deep));
+    display:flex; align-items:center; justify-content:center;
+    color:#fff; font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:22px; margin-bottom:18px;
+  }
+  .persona-id h3{ font-size:22px; margin-bottom:4px;}
+  .persona-id .age{ font-family:'IBM Plex Mono',monospace; color:var(--accent); font-size:13.5px; margin-bottom:14px;}
+  .persona-id p{ color:var(--ink-soft); font-size:14.5px; }
+  .persona-grid{ display:grid; grid-template-columns:1fr 1fr; gap:26px;}
+  @media (max-width:560px){ .persona-grid{ grid-template-columns:1fr; } }
+  .persona-block h4{ font-size:12.5px; text-transform:uppercase; letter-spacing:.08em; color:var(--steel); font-family:'IBM Plex Mono',monospace; margin-bottom:10px; font-weight:500;}
+  .persona-block ul{ list-style:none; }
+  .persona-block li{ position:relative; padding-left:16px; margin-bottom:8px; font-size:14.5px; color:var(--ink); }
+  .persona-block li::before{ content:'—'; position:absolute; left:0; color:var(--accent); }
+
+  /* ---------- Positioning ---------- */
+  .position-block{ background:var(--teal-deeper); border-radius:24px; padding:52px; color:#EAF5F3;}
+  .position-block .eyebrow{ color:var(--accent-bright); }
+  .position-block .eyebrow::before{ background:var(--accent-bright); }
+  .position-statement{ font-family:'Space Grotesk',sans-serif; font-size:clamp(20px,2.4vw,27px); line-height:1.4; max-width:820px; color:#fff; margin-bottom:34px; font-weight:500;}
+  .value-prop{ font-size:16px; color:#BFDBD6; max-width:700px; margin-bottom:36px; }
+  .diff-row{ display:flex; flex-wrap:wrap; gap:12px; }
+  .diff-pill{ border:1px solid rgba(255,255,255,0.18); background:rgba(255,255,255,0.05); color:#DCF0EC; font-size:13.5px; padding:9px 16px; border-radius:100px;}
+
+  /* ---------- Strategy ---------- */
+  .strat-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:20px;}
+  @media (max-width:900px){ .strat-grid{ grid-template-columns:1fr; } }
+
+  /* ---------- Timeline (genuine sequence -> numbered) ---------- */
+  .timeline{ position:relative; padding-left:28px; border-left:2px solid var(--line); display:flex; flex-direction:column; gap:0;}
+  .tl-item{ position:relative; padding:0 0 30px 26px; }
+  .tl-item:last-child{ padding-bottom:0; }
+  .tl-item::before{
+    content: attr(data-week);
+    position:absolute; left:-41px; top:0;
+    width:28px; height:28px; border-radius:50%;
+    background:var(--surface); border:2px solid var(--accent); color:var(--teal-deeper);
+    display:flex; align-items:center; justify-content:center;
+    font-family:'IBM Plex Mono',monospace; font-size:11px; font-weight:500;
+  }
+  .tl-item h4{ font-size:16px; margin-bottom:4px;}
+  .tl-item p{ color:var(--ink-soft); font-size:14px;}
+  .tl-week-label{ font-family:'IBM Plex Mono',monospace; color:var(--accent); font-size:12px; text-transform:uppercase; letter-spacing:.06em; margin-bottom:4px; display:block;}
+
+  /* ---------- Metrics ---------- */
+  .metric-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:14px;}
+  @media (max-width:760px){ .metric-grid{ grid-template-columns:1fr 1fr; } }
+  @media (max-width:480px){ .metric-grid{ grid-template-columns:1fr; } }
+  .metric-chip{ background:var(--surface); border:1px solid var(--line); border-radius:14px; padding:18px 18px; font-size:14px; color:var(--ink-soft);}
+  .metric-chip b{ display:block; color:var(--teal-deeper); font-family:'Space Grotesk',sans-serif; font-size:15px; margin-bottom:4px;}
+
+  footer{ padding:60px 0 50px; border-top:1px solid var(--line); }
+  .foot-inner{ display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px;}
+  .foot-inner p{ color:var(--steel); font-size:13px; }
+
+  .reveal{ opacity:0; transform:translateY(18px); transition:opacity .7s ease, transform .7s ease; }
+  .reveal.in{ opacity:1; transform:translateY(0); }
+
+  @media (prefers-reduced-motion: reduce){
+    .reveal{ opacity:1; transform:none; transition:none; }
+    html{ scroll-behavior:auto; }
+  }
+
+  a:focus-visible, button:focus-visible{ outline:2px solid var(--accent); outline-offset:3px; }
+</style>
+</head>
+<body>
+
+<nav class="topnav">
+  <div class="topnav-inner">
+    <div class="brand">
+      <svg class="drop" viewBox="0 0 14 16" fill="none"><path d="M7 0C7 0 0 8.2 0 11.5C0 14 3 16 7 16C11 16 14 14 14 11.5C14 8.2 7 0 7 0Z" fill="#1FAE9C"/></svg>
+      Essencial Purificadores
+    </div>
+    <div class="navlinks">
+      <a href="#demanda">Demanda</a>
+      <a href="#comportamento">Cliente</a>
+      <a href="#produtos">Produtos</a>
+      <a href="#concorrencia">Concorrência</a>
+      <a href="#persona">Persona</a>
+      <a href="#posicionamento">Marca</a>
+      <a href="#cronograma">Execução</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap hero-inner">
+    <div>
+      <div class="eyebrow">Pesquisa de Mercado · Grande Goiânia</div>
+      <h1>Água limpa é o produto.<br>Confiança é <span>o que se vende.</span></h1>
+      <p class="sub">Um raio-x do mercado de purificadores da Grande Goiânia — demanda, comportamento do consumidor, concorrência e o posicionamento que vai sustentar a Essencial Purificadores nos próximos 90 dias.</p>
+      <div class="hero-tags">
+        <span class="tag">2,4M habitantes</span>
+        <span class="tag">1,08M domicílios</span>
+        <span class="tag">54% já filtram água</span>
+        <span class="tag">12+ anos de mercado</span>
+      </div>
+    </div>
+    <div class="ripple-wrap">
+      <svg viewBox="0 0 320 320">
+        <circle class="ripple-ring" cx="160" cy="160" r="150" stroke-width="1"/>
+        <circle class="ripple-ring" cx="160" cy="160" r="112" stroke-width="1" opacity="0.7"/>
+        <circle class="ripple-ring" cx="160" cy="160" r="76" stroke-width="1.4" opacity="0.85"/>
+        <circle cx="160" cy="160" r="40" fill="#0E4A4D"/>
+        <text x="160" y="156" text-anchor="middle" fill="#EAF5F3" font-family="IBM Plex Mono" font-size="12">54%</text>
+        <text x="160" y="172" text-anchor="middle" fill="#BFE3DC" font-family="IBM Plex Mono" font-size="8">filtram água</text>
+      </svg>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <!-- DEMANDA -->
+  <section id="demanda">
+    <div class="wrap">
+      <div class="eyebrow">01 · Demanda de mercado</div>
+      <h2 class="title reveal">Um mercado grande, urbano e ainda em expansão</h2>
+      <p class="lede reveal">O crescimento populacional, a verticalização de Goiânia e a preocupação crescente com saúde impulsionam a demanda por purificadores — e, principalmente, pelos serviços recorrentes de manutenção e troca de refil.</p>
+
+      <div class="stat-grid reveal">
+        <div class="stat-card">
+          <span class="num mono">2,4<small>milhões</small></span>
+          <span class="label">Habitantes na Região Metropolitana de Goiânia</span>
+        </div>
+        <div class="stat-card">
+          <span class="num mono">1,08<small>milhão</small></span>
+          <span class="label">Domicílios na Grande Goiânia</span>
+        </div>
+        <div class="stat-card">
+          <span class="num mono">85<small>%</small></span>
+          <span class="label">Dos casos em que o preço influencia diretamente a decisão de compra</span>
+        </div>
+      </div>
+
+      <div style="height:56px"></div>
+
+      <div class="funnel reveal">
+        <div class="funnel-rings">
+          <svg viewBox="0 0 400 340" width="100%" height="100%">
+            <circle cx="200" cy="170" r="160" fill="none" stroke="#D8E6E3" stroke-width="1.5"/>
+            <circle cx="200" cy="170" r="118" fill="none" stroke="#1FAE9C" stroke-width="1.5" opacity="0.55"/>
+            <circle cx="200" cy="170" r="72" fill="#0E4A4D"/>
+            <text x="200" y="60" text-anchor="middle" font-family="IBM Plex Mono" font-size="11" fill="#3E5D60">2,4M habitantes</text>
+            <text x="200" y="110" text-anchor="middle" font-family="IBM Plex Mono" font-size="11" fill="#0E4A4D">1,08M domicílios</text>
+            <text x="200" y="166" text-anchor="middle" font-family="IBM Plex Mono" font-size="13" fill="#EAF5F3">587.767</text>
+            <text x="200" y="184" text-anchor="middle" font-family="IBM Plex Mono" font-size="9" fill="#BFE3DC">domicílios filtram água</text>
+          </svg>
+        </div>
+        <div class="funnel-legend">
+          <div class="funnel-item"><span class="funnel-dot" style="background:#D8E6E3"></span><div><span class="fnum">2.400.000</span><br><span class="flabel">habitantes na Grande Goiânia</span></div></div>
+          <div class="funnel-item"><span class="funnel-dot" style="background:#1FAE9C"></span><div><span class="fnum">1.080.000</span><br><span class="flabel">domicílios na região</span></div></div>
+          <div class="funnel-item"><span class="funnel-dot" style="background:#0E4A4D"></span><div><span class="fnum">587.767</span><br><span class="flabel">domicílios com algum sistema de filtragem (54% do total regional)</span></div></div>
+          <div class="funnel-item"><span class="funnel-dot" style="background:#0E4A4D"></span><div><span class="fnum">353.916</span><br><span class="flabel">domicílios com purificador só na cidade de Goiânia</span></div></div>
+        </div>
+      </div>
+
+      <div style="height:48px"></div>
+
+      <div class="cols-2 reveal">
+        <div class="panel">
+          <h3>Tendência</h3>
+          <p style="color:var(--ink-soft); font-size:15px;">O mercado está em crescimento. Expansão imobiliária, verticalização e maior consciência sobre saúde e qualidade de vida seguem ampliando a base de domicílios com purificador — e, junto dela, a demanda por manutenção recorrente.</p>
+        </div>
+        <div class="panel">
+          <h3>Quem mais compra</h3>
+          <p style="color:var(--ink-soft); font-size:15px;">O segmento residencial lidera a demanda, seguido por pequenos comércios, escritórios, clínicas e empresas — um funil que começa em casa e se estende ao ambiente de trabalho.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMPORTAMENTO -->
+  <section id="comportamento" style="background:var(--surface); border-top:1px solid var(--line); border-bottom:1px solid var(--line);">
+    <div class="wrap">
+      <div class="eyebrow">02 · Comportamento do cliente</div>
+      <h2 class="title reveal">A compra nasce da mudança. A fidelidade nasce da confiança.</h2>
+      <p class="lede reveal">A decisão de instalar um purificador geralmente acompanha um novo lar. A decisão de continuar cliente depende inteiramente de quanta confiança o serviço transmite.</p>
+
+      <div class="cols-2 reveal" style="margin-bottom:24px;">
+        <div class="panel">
+          <h3>Quando a compra acontece</h3>
+          <ul>
+            <li>Ao conquistar a própria moradia</li>
+            <li>Ao mudar de residência</li>
+            <li>Ao trocar o uso de galões por uma solução mais prática e econômica</li>
+          </ul>
+        </div>
+        <div class="panel">
+          <h3>Motivos para trocar o refil</h3>
+          <ul>
+            <li>Alteração no sabor ou odor da água</li>
+            <li>Redução do fluxo de água</li>
+            <li>Prazo recomendado pelo fabricante</li>
+            <li>Preocupação com a qualidade da filtragem</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="cols-2 reveal">
+        <div class="panel warn">
+          <h3>Maiores medos</h3>
+          <ul>
+            <li>Consumir água contaminada</li>
+            <li>Comprar um produto de baixa qualidade</li>
+            <li>Contratar assistência técnica sem confiança</li>
+            <li>Pagar por manutenção desnecessária</li>
+          </ul>
+        </div>
+        <div class="panel">
+          <h3>O que gera confiança</h3>
+          <ul>
+            <li>Atendimento profissional</li>
+            <li>Organização e higiene durante o serviço</li>
+            <li>Explicações claras</li>
+            <li>Garantia do serviço</li>
+            <li>Avaliações positivas de outros clientes</li>
+          </ul>
+        </div>
+      </div>
+
+      <div style="height:40px"></div>
+      <div class="stat-grid reveal" style="grid-template-columns:1fr 1fr;">
+        <div class="stat-card">
+          <span class="num mono">Google + indicação</span>
+          <span class="label">O Google é a primeira fonte de pesquisa; indicações de amigos e família reforçam a decisão final de compra.</span>
+        </div>
+        <div class="stat-card">
+          <span class="num mono">85<small>%</small></span>
+          <span class="label">Dos casos o preço influencia diretamente a escolha — especialmente quando há pouca diferenciação entre concorrentes.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRODUTOS -->
+  <section id="produtos">
+    <div class="wrap">
+      <div class="eyebrow">03 · Produtos mais vendidos</div>
+      <h2 class="title reveal">Everest domina as vendas — e a base instalada de refis</h2>
+      <p class="lede reveal">A força da Soft by Everest não está só em vender purificadores, mas em manter uma base instalada que sustenta a demanda contínua por refis.</p>
+
+      <div class="rank-list reveal">
+        <div class="rank-row">
+          <span class="rn">01</span>
+          <span class="rname">Soft by Everest</span>
+          <div class="rank-bar-track"><div class="rank-bar" style="width:92%"></div></div>
+        </div>
+        <div class="rank-row">
+          <span class="rn">02</span>
+          <span class="rname">Consul</span>
+          <div class="rank-bar-track"><div class="rank-bar" style="width:68%"></div></div>
+        </div>
+        <div class="rank-row">
+          <span class="rn">03</span>
+          <span class="rname">Electrolux</span>
+          <div class="rank-bar-track"><div class="rank-bar" style="width:58%"></div></div>
+        </div>
+        <div class="rank-row">
+          <span class="rn">04</span>
+          <span class="rname">IBBL</span>
+          <div class="rank-bar-track"><div class="rank-bar" style="width:42%"></div></div>
+        </div>
+      </div>
+      <p style="color:var(--ink-soft); font-size:13.5px; margin-top:10px;">Ranking qualitativo de presença de mercado, com base na pesquisa. Os refis Everest são os mais procurados, dada a grande base instalada da marca.</p>
+
+      <div style="height:56px"></div>
+
+      <h3 style="font-size:20px; margin-bottom:8px;" class="reveal">Modelos que exigem mais manutenção</h3>
+      <p class="lede" style="margin-bottom:28px;">Conhecer esses modelos é uma vantagem comercial direta: são eles que geram o volume mais previsível de chamados técnicos.</p>
+
+      <div class="maint-grid reveal">
+        <div class="maint-card">
+          <span class="tagr">Painel eletrônico touch</span>
+          <h4>Electrolux PE12B e similares</h4>
+          <p>Usam placas Peltier para refrigeração. Em locais quentes ou com pouca ventilação, essas placas falham mais — e problemas elétricos podem comprometer todo o painel touch.</p>
+        </div>
+        <div class="maint-card">
+          <span class="tagr">Filtragem Classe A</span>
+          <h4>Consul CPB33 / CPB34</h4>
+          <p>Boa capacidade de filtragem, mas o fluxo de água cai antes do previsto quando a água tem alta concentração de sedimentos.</p>
+        </div>
+        <div class="maint-card">
+          <span class="tagr">Bomba interna</span>
+          <h4>Modelos compactos com bomba elétrica</h4>
+          <p>Mais componentes eletrônicos embarcados aumentam, ao longo do tempo, a probabilidade de manutenção.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONCORRÊNCIA -->
+  <section id="concorrencia" style="background:var(--surface); border-top:1px solid var(--line); border-bottom:1px solid var(--line);">
+    <div class="wrap">
+      <div class="eyebrow">04 · Concorrência</div>
+      <h2 class="title reveal">Nenhum concorrente direto ocupou a posição de especialista técnico</h2>
+      <p class="lede reveal">Os três principais concorrentes competem por preço e volume de conteúdo — não por autoridade técnica ou confiança construída de forma deliberada.</p>
+
+      <div class="comp-grid reveal">
+        <div class="comp-card">
+          <div class="comp-head">
+            <h4>Puri Vida</h4>
+            <div class="score"><span class="val">4,7</span><br><span class="cnt">12 avaliações</span></div>
+          </div>
+          <p style="font-size:14px; color:var(--ink-soft);">Comunicação simples e objetiva. Instagram ativo com Reels, artes aparentemente feitas com IA.</p>
+          <div class="diff">Sem diferencial competitivo evidente</div>
+          <div class="links"><a href="https://purividafiltros.com/" target="_blank" rel="noopener">Site</a></div>
+        </div>
+        <div class="comp-card">
+          <div class="comp-head">
+            <h4>El Shaddai</h4>
+            <div class="score"><span class="val">5,0</span><br><span class="cnt">19 avaliações</span></div>
+          </div>
+          <p style="font-size:14px; color:var(--ink-soft);">Comunicação simples e direta. Instagram ativo, mas sem identidade visual consistente e com pouca estratégia de conteúdo.</p>
+          <div class="diff">Diferencial: atendimento em domicílio</div>
+          <div class="links"><a href="https://elshaddaigo.com.br/" target="_blank" rel="noopener">Site</a></div>
+        </div>
+        <div class="comp-card">
+          <div class="comp-head">
+            <h4>Cristal</h4>
+            <div class="score"><span class="val">4,1</span><br><span class="cnt">66 avaliações</span></div>
+          </div>
+          <p style="font-size:14px; color:var(--ink-soft);">Comunicação voltada para vendas. Reels informativos publicados com frequência, foco comercial forte.</p>
+          <div class="diff">Diferencial: volume e frequência de conteúdo em vídeo</div>
+          <div class="links">Site focado em vendas</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PERSONA -->
+  <section id="persona">
+    <div class="wrap">
+      <div class="eyebrow">05 · Persona</div>
+      <h2 class="title reveal">Ana Paula decide pela família — e pesquisa antes de confiar</h2>
+      <p class="lede reveal">Toda a comunicação da marca deve responder às perguntas que já passam pela cabeça dela antes mesmo do primeiro contato.</p>
+
+      <div class="persona reveal">
+        <div class="persona-id">
+          <div class="persona-avatar">AP</div>
+          <h3>Ana Paula</h3>
+          <div class="age mono">35 – 60 anos</div>
+          <p>Casada, dona de casa ou profissional com renda estável, responsável pelas decisões de compra do lar. Seu objetivo é garantir água limpa, segura e de qualidade para toda a família.</p>
+        </div>
+        <div class="persona-grid">
+          <div class="persona-block">
+            <h4>Principais dores</h4>
+            <ul>
+              <li>Não sabe quando trocar o refil</li>
+              <li>Tem dúvidas sobre a manutenção</li>
+              <li>Receio de consumir água contaminada</li>
+              <li>Procura uma assistência técnica confiável</li>
+            </ul>
+          </div>
+          <div class="persona-block">
+            <h4>Comportamento de compra</h4>
+            <ul>
+              <li>Pesquisa no Google</li>
+              <li>Busca indicações</li>
+              <li>Analisa avaliações antes de contratar</li>
+              <li>Prefere atendimento rápido pelo WhatsApp</li>
+            </ul>
+          </div>
+          <div class="persona-block">
+            <h4>Principais objeções</h4>
+            <ul>
+              <li>Preço</li>
+              <li>Dúvidas sobre a necessidade da manutenção</li>
+              <li>Falta de confiança na empresa</li>
+            </ul>
+          </div>
+          <div class="persona-block">
+            <h4>O que gera confiança</h4>
+            <ul>
+              <li>Especialização técnica</li>
+              <li>Atendimento profissional</li>
+              <li>Avaliações positivas</li>
+              <li>Garantia do serviço e explicações honestas</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- POSICIONAMENTO -->
+  <section id="posicionamento" style="background:var(--bg);">
+    <div class="wrap">
+      <div class="position-block reveal">
+        <div class="eyebrow">06 · Posicionamento da marca</div>
+        <p class="position-statement">A Essencial Purificadores é especializada em soluções completas de purificação para residências e empresas — com atendimento profissional, assistência técnica especializada e foco na saúde, segurança e bem-estar das famílias da Grande Goiânia.</p>
+        <p class="value-prop">Proposta de valor: garantimos água de qualidade por meio de um atendimento especializado, transparente e confiável, oferecendo instalação, manutenção e troca de refis com excelência.</p>
+        <div class="diff-row">
+          <span class="diff-pill">12+ anos de mercado</span>
+          <span class="diff-pill">Especialização em assistência técnica</span>
+          <span class="diff-pill">Atendimento profissional e organizado</span>
+          <span class="diff-pill">Agilidade no atendimento</span>
+          <span class="diff-pill">Transparência em todas as etapas</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ESTRATÉGIA -->
+  <section id="estrategia">
+    <div class="wrap">
+      <div class="eyebrow">07 · Estratégia de marketing</div>
+      <h2 class="title reveal">Aquisição, fidelização e conteúdo trabalhando juntos</h2>
+      <p class="lede reveal">O objetivo é tornar a Essencial Purificadores reconhecida como referência em assistência técnica e purificadores na Grande Goiânia.</p>
+
+      <div class="strat-grid reveal">
+        <div class="panel">
+          <h3>Aquisição</h3>
+          <ul>
+            <li>Google — SEO e Google Ads</li>
+            <li>Instagram — conteúdo educativo e prova social</li>
+            <li>WhatsApp — principal canal de atendimento</li>
+          </ul>
+        </div>
+        <div class="panel">
+          <h3>Fidelização</h3>
+          <ul>
+            <li>Cadastro de clientes</li>
+            <li>Lembretes automáticos para troca de refil</li>
+            <li>Pós-venda e solicitação de avaliações</li>
+          </ul>
+        </div>
+        <div class="panel">
+          <h3>Conteúdo</h3>
+          <ul>
+            <li>Educação sobre purificadores</li>
+            <li>Demonstração de autoridade técnica</li>
+            <li>Depoimentos de clientes</li>
+            <li>Ofertas e promoções</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CRONOGRAMA -->
+  <section id="cronograma" style="background:var(--surface); border-top:1px solid var(--line); border-bottom:1px solid var(--line);">
+    <div class="wrap">
+      <div class="eyebrow">08 · Cronograma de execução — 90 dias</div>
+      <h2 class="title reveal">Da estratégia à primeira campanha, em 6 semanas</h2>
+
+      <div class="timeline reveal">
+        <div class="tl-item" data-week="S1">
+          <span class="tl-week-label">Semana 1</span>
+          <h4>Pesquisa de mercado, persona e posicionamento</h4>
+          <p>Base estratégica, definição do público-alvo e direcionamento da comunicação. <em>(concluído)</em></p>
+        </div>
+        <div class="tl-item" data-week="S2">
+          <span class="tl-week-label">Semana 2</span>
+          <h4>Identidade visual e configuração de redes sociais</h4>
+          <p>Criação de uma marca profissional e padronização dos perfis no Instagram e Facebook.</p>
+        </div>
+        <div class="tl-item" data-week="S3">
+          <span class="tl-week-label">Semana 3</span>
+          <h4>Planejamento de conteúdo e site institucional</h4>
+          <p>Organização das publicações de 30 dias e criação do site para gerar credibilidade e captar leads.</p>
+        </div>
+        <div class="tl-item" data-week="S4">
+          <span class="tl-week-label">Semana 4</span>
+          <h4>Google Meu Negócio, Analytics e Tag Manager</h4>
+          <p>Melhoria da presença nas buscas e estrutura de mensuração de resultados.</p>
+        </div>
+        <div class="tl-item" data-week="S5">
+          <span class="tl-week-label">Semana 5</span>
+          <h4>Configuração e início do Google Ads</h4>
+          <p>Preparação de campanhas e início da geração de contatos.</p>
+        </div>
+        <div class="tl-item" data-week="S6">
+          <span class="tl-week-label">Semana 6</span>
+          <h4>Novos conteúdos e avaliações no Google</h4>
+          <p>Atração de clientes com intenção de compra e fortalecimento da autoridade da marca.</p>
+        </div>
+        <div class="tl-item" data-week="7–12">
+          <span class="tl-week-label">Semanas 7 a 12</span>
+          <h4>Otimização contínua</h4>
+          <p>Ajuste de campanhas, conteúdo e site com base nos primeiros resultados.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MÉTRICAS -->
+  <section id="metricas">
+    <div class="wrap">
+      <div class="eyebrow">09 · Métricas de acompanhamento</div>
+      <h2 class="title reveal">Como saberemos que está funcionando</h2>
+
+      <div class="metric-grid reveal">
+        <div class="metric-chip"><b>Leads gerados</b>Contatos via WhatsApp, site e Google.</div>
+        <div class="metric-chip"><b>Agendamentos</b>Serviços agendados por mês.</div>
+        <div class="metric-chip"><b>Conversão</b>% de leads que viram clientes.</div>
+        <div class="metric-chip"><b>Faturamento</b>Receita mensal de serviços e vendas.</div>
+        <div class="metric-chip"><b>Clientes recorrentes</b>Retorno para troca de refil ou manutenção.</div>
+        <div class="metric-chip"><b>Avaliações no Google</b>Volume e nota média da empresa.</div>
+        <div class="metric-chip"><b>Redes sociais</b>Alcance, engajamento, seguidores e mensagens.</div>
+        <div class="metric-chip"><b>Google Ads</b>Cliques, CPL, taxa de conversão e ROI.</div>
+        <div class="metric-chip"><b>Site</b>Visitantes, origem do tráfego e conversão em contatos.</div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap foot-inner">
+    <div class="brand">
+      <svg class="drop" viewBox="0 0 14 16" fill="none"><path d="M7 0C7 0 0 8.2 0 11.5C0 14 3 16 7 16C11 16 14 14 14 11.5C14 8.2 7 0 7 0Z" fill="#1FAE9C"/></svg>
+      Essencial Purificadores
+    </div>
+    <p>Pesquisa de Mercado · Grande Goiânia · Julho de 2026</p>
+  </div>
+</footer>
+
+<script>
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+    });
+  }, { threshold: 0.12 });
+  revealEls.forEach(el=>io.observe(el));
+</script>
+
+</body>
+</html>
